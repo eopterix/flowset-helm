@@ -1,0 +1,94 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: flowset-control-app
+spec:
+  #replicas: 1
+  selector:
+    matchLabels:
+      app: flowset-control-app
+  template: 
+    metadata:
+      labels:
+        app: flowset-control-app
+    spec:
+      containers:
+        - name: flowset-control-app
+          image: flowset/flowset-control-community:latest
+          env:
+            - name: MAIN_DATASOURCE_URL
+              value: "jdbc:postgresql://flowset-control-database/{{ .Values.flowset.control.db.name }}"
+            - name: MAIN_DATASOURCE_USERNAME
+              value: {{ .Values.flowset.control.db.username }}
+            - name: MAIN_DATASOURCE_PASSWORD
+              value: {{ .Values.flowset.control.db.password }}
+            - name: SERVER_PORT
+              value: "{{ .Values.flowset.control.server.port }}"
+            - name: UI_LOGIN_DEFAULTUSERNAME 
+              value: {{ .Values.flowset.control.ui.default.username }}
+            - name: UI_LOGIN_DEFAULTPASSWORD 
+              value: {{ .Values.flowset.control.ui.default.password }}
+          ports:
+            - containerPort: {{ .Values.flowset.control.server.port }}
+          
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flowset-control-database
+spec:
+  #replicas: 1
+  selector:
+    matchLabels:
+      app: flowset-control-database
+  template: 
+    metadata:
+      labels:
+        app: flowset-control-database
+    spec:
+      containers:
+        - name: flowset-control-database
+          image: postgres:16.3
+          env: 
+            - name: POSTGRES_USER
+              value: {{ .Values.flowset.control.db.username }} 
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.flowset.control.db.password }} 
+            - name: POSTGRES_DB
+              value: {{ .Values.flowset.control.db.name }} 
+          ports: 
+            - containerPort: 5432
+          volumeMounts:
+            - name: flowset-control-database-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: flowset-control-database-data
+          hostPath:
+            path: /tmp/test 
+            type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flowset-control-app-service
+spec:
+  selector:
+    app: flowset-control-app
+  ports:
+    - port: {{ .Values.flowset.control.server.port }}
+      targetPort: {{ .Values.flowset.control.server.port }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flowset-control-database-service
+spec:
+  selector:
+    app: flowset-control-database
+  ports:
+    - port: 5432
+      targetPort: 5432

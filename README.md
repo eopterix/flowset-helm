@@ -1,18 +1,33 @@
-# EOEPCA Deployment Playground
+# flowset-help
 
-Implementing [[https://github.com/flowset/flowset-control-community/blob/main/docker-compose/docker-compose-core.yaml|docker-compose]] setup as a helm chart on EOEPCA workspace.
+Helm Charts for Flowset
 
-## Usage
+## How to install
+### Add the Helm Chart Repository
+To add the Helm chart repository for Flowset, run:
 
-    helm install flowset-control .
+```shell
+helm repo add flowset https://dlr-terrabyte.github.io/flowset-helm/
+```
 
-...and follow instructions :P
+### Verify the Repository
+To confirm that the repository has been added successfully, list all available repositories:
 
-## Issues
+```shell
+helm repo list
+```
 
-The (connection to the) vCluster on EOEPCA Workspace seems kind of unstable?
-Current workaround is to loop this until it's up:
+### Update Helm Repositories
+Fetch the latest available chart versions by updating your Helm repositories:
 
-    helm install flowset-control .
-    helm uninstall flowset-control
+```shell
+helm repo update
+```
 
+### List Available Flowset Versions
+
+To check the available versions of the Flowset chart, use the following command:
+
+```shell
+helm search repo flowset --devel
+```

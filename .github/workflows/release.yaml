@@ -1,0 +1,21 @@
+name: Release Charts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  HELM_VERSION: 3.17.0
+  PYTHON_VERSION: 3.13
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run chart-releaser
+        user: helm/chart-releaser-action@v1.7.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+

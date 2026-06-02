@@ -97,10 +97,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - flowset-control.misc.test.terrabyte.lrz.de
+        - flowset-control.ws.test.terrabyte.lrz.de
       secretName: wildcard-tls
   rules:
-    - host: flowset-control.misc.test.terrabyte.lrz.de
+    - host: flowset-control.ws.test.terrabyte.lrz.de
       http:
         paths:
           - path: /
@@ -124,6 +124,6 @@ spec:
       servicePort: 80
     match:
       hosts:
-      - flowset-control.misc.test.terrabyte.lrz.de
+      - flowset-control.ws.test.terrabyte.lrz.de
       paths:
       - /

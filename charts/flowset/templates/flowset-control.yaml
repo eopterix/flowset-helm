@@ -94,6 +94,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: flowset-control-ingress
+  # Ref. https://argo-cd.readthedocs.io/en/release-2.0/faq/#why-is-my-application-stuck-in-progressing-state
   annotations:
     argocd.argoproj.io/ignore-healthcheck: "true"
 spec:

@@ -98,7 +98,7 @@ spec:
   tls:
     - hosts:
         - flowset-control.ws.test.terrabyte.lrz.de
-      secretName: wildcard-tls
+      secretName: wildcard-ws-tls
   rules:
     - host: flowset-control.ws.test.terrabyte.lrz.de
       http:

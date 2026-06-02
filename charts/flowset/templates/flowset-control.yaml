@@ -95,6 +95,8 @@ kind: Ingress
 metadata:
   name: flowset-control-ingress
 spec:
+  annotations:
+    argocd.argoproj.io/ignore-healthcheck: "true"
   tls:
     - hosts:
         - flowset-control.ws.test.terrabyte.lrz.de

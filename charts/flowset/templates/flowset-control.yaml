@@ -110,3 +110,20 @@ spec:
                 name: flowset-control-app-service
                 port:
                   number: {{ .Values.flowset.control.server.port }}
+---
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: flowset-control-route
+spec:
+  ingressClassName: apisix
+  http:
+  - name: flowset-control-route
+    backends:
+    - serviceName: flowset-control-app-service
+      servicePort: 80
+    match:
+      hosts:
+      - flowset-control.misc.test.terrabyte.lrz.de
+      paths:
+      - /

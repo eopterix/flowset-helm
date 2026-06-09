@@ -15,7 +15,8 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: postgres-database
+        - name: {{ .Release.Name }}-{{ .Values.postgres_database.name }}
+          # becomes db hostname ^
           image: postgres:16.3
           env:
             - name: POSTGRES_USER

@@ -15,6 +15,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: flowset-control-app-service
+                name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
                 port:
                   number: {{ .Values.flowset_control.port }}

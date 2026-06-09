@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.postgres_database.name }}
+  name: {{ .Release.Name }}-{{ .Values.postgres_database.name }}
 spec:
   selector:
     matchLabels:

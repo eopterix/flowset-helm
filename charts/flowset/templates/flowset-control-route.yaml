@@ -1,13 +1,13 @@
 apiVersion: apisix.apache.org/v2
 kind: ApisixRoute
 metadata:
-  name: flowset-control-route
+  name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
 spec:
   ingressClassName: apisix
   http:
-  - name: flowset-control-route
+  - name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
     backends:
-    - serviceName: flowset-control-app-service
+    - serviceName: {{ .Release.Name }}-{{ .Values.flowset-control.name }}
       servicePort: 80
     match:
       hosts:

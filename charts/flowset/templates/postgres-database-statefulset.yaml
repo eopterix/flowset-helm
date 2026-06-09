@@ -14,7 +14,6 @@ spec:
         app.kubernetes.io/name: {{ .Values.postgres_database.name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      hostname: flowset-control-database-service
       containers:
         - name: postgres-database
           image: postgres:16.3

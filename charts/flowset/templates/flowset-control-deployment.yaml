@@ -18,8 +18,7 @@ spec:
           image: flowset/flowset-control-community:latest
           env:
             - name: MAIN_DATASOURCE_URL
-#              value: "jdbc:postgresql://{{ .Release.Name }}.{{ .Values.postgres_database.name }}/{{ .Values.postgres_database.database }}"
-              value: "jdbc:postgresql://testtesttest/{{ .Values.postgres_database.database }}"
+              value: "jdbc:postgresql://{{ .Release.Name }}.{{ .Values.postgres_database.name }}/{{ .Values.postgres_database.database }}"
             - name: MAIN_DATASOURCE_USERNAME
               value: {{ .Values.postgres_database.username }}
             - name: MAIN_DATASOURCE_PASSWORD

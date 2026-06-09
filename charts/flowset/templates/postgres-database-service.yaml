@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.postgres_database.name }}
+spec:
+  selector:
+    app.kubernetes.io/name: {{ .Values.postgres_database.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+    - port: 5432
+      targetPort: 5432

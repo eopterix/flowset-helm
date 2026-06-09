@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.flowset_control.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.flowset_control.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: flowset-control-community
+          image: flowset/flowset-control-community:latest
+          env:
+            - name: MAIN_DATASOURCE_URL
+              value: "jdbc:postgresql://flowset-control-database-service/{{ .Values.postgres_database.database }}"
+            - name: MAIN_DATASOURCE_USERNAME
+              value: {{ .Values.postgres_database.username }}
+            - name: MAIN_DATASOURCE_PASSWORD
+              value: {{ .Values.postgres_database.password }}
+            - name: SERVER_PORT
+              value: "{{ .Values.flowset_control.port }}"
+            - name: UI_LOGIN_DEFAULTUSERNAME
+              value: {{ .Values.flowset_control.default_username }}
+            - name: UI_LOGIN_DEFAULTPASSWORD
+              value: {{ .Values.flowset_control.default_password }}
+          ports:
+            - containerPort: {{ .Values.flowset_control.port }}

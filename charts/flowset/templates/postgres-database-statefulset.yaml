@@ -1,0 +1,37 @@
+{{- if .Values.postgres_database.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.postgres_database.name }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.postgres_database.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.postgres_database.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: postgres-database
+          image: postgres:16.3
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.postgres_database.username }} 
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres_database.password }} 
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres_database.database }} 
+          ports: 
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-database-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-database-data
+          hostPath:
+            path: /tmp/test
+            type: DirectoryOrCreate
+{{- end }}

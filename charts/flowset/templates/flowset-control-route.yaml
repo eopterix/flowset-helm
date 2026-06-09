@@ -1,0 +1,16 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: flowset-control-route
+spec:
+  ingressClassName: apisix
+  http:
+  - name: flowset-control-route
+    backends:
+    - serviceName: flowset-control-app-service
+      servicePort: 80
+    match:
+      hosts:
+      - flowset-control.test.terrabyte.lrz.de
+      paths:
+      - /

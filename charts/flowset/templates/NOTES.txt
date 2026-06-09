@@ -1,4 +1,4 @@
-Thank you for deploying {{ .Chart.description }} v{{ .Chart.appVersion }}!
+Thank you for deploying {{ .Chart.Name }} v{{ .Chart.AppVersion }}!
 
                                                 ,
                                               ,##

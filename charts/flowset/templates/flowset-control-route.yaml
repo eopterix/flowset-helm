@@ -7,7 +7,7 @@ spec:
   http:
   - name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
     backends:
-    - serviceName: {{ .Release.Name }}-{{ .Values.flowset-control.name }}
+    - serviceName: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
       servicePort: 80
     match:
       hosts:

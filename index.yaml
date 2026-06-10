@@ -3,6 +3,17 @@ entries:
   flowset:
   - apiVersion: v2
     appVersion: 2026.0.0
+    created: "2026-06-10T12:48:56.757509667Z"
+    description: Flowset Web apps
+    digest: 4b0688dc3b03a2d4a47eab7eb0e4f4ac97bd9b8f9a1b940a28772c81d8c7b9a1
+    icon: https://avatars.githubusercontent.com/u/185957921
+    name: flowset
+    type: application
+    urls:
+    - https://github.com/eopterix/flowset-helm/releases/download/flowset-0.1.13/flowset-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
+    appVersion: 2026.0.0
     created: "2026-06-09T18:31:03.756421197Z"
     description: Flowset Web apps
     digest: ca07ad6a2421ac096e1dc3e4a5b0da7d8c9b9d0b4d9c63be1f906995bbbe815e
@@ -56,4 +67,4 @@ entries:
     urls:
     - https://github.com/eopterix/flowset-helm/releases/download/flowset-0.1.8/flowset-0.1.8.tgz
     version: 0.1.8
-generated: "2026-06-09T18:31:03.756440974Z"
+generated: "2026-06-10T12:48:56.757533257Z"

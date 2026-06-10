@@ -11,6 +11,8 @@ spec:
       servicePort: 80
     match:
       hosts:
-      - flowset-control.test.terrabyte.lrz.de
+        {{- with .Values.flowset_control.hosts }}
+          {{- tpl (toYaml .) $ | nindent 8 }}
+        {{- end }}
       paths:
       - /

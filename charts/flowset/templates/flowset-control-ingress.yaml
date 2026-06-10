@@ -2,13 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-{{ .Values.flowset_control.name }}
+  annotations:
+    {{- with .Values.flowset_control.ingress.annotations }}
+      {{- tpl (toYaml .) $ | nindent 4 }}
+    {{- end }}
 spec:
   tls:
     - hosts:
-        - flowset-control.test.terrabyte.lrz.de
-      secretName: wildcard-tls
+        {{- with .Values.flowset_control.hosts }}
+          {{- tpl (toYaml .) $ | nindent 8 }}
+        {{- end }}
+      secretName: {{ .Values.flowset_control.ingress.tls.secretName }}
   rules:
-    - host: flowset-control.test.terrabyte.lrz.de
+    - host: {{ .Values.flowset_control.ingress.rules.host }}
       http:
         paths:
           - path: /

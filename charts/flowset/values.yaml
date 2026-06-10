@@ -13,3 +13,14 @@ flowset_control:
   port: 8081
   default_username: ""
   default_password: ""
+
+  hosts: 
+    - flowset-control.your-domain.com
+
+  ingress:
+    annotations:
+      - annotate: something
+    tls:
+      secretName: your-cert
+    rules:
+      host: flowset-control.your-domain.com

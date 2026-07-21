@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: flowset-control-community
-          image: flowset/flowset-control-community:latest
+          image: flowset/flowset-control-community:2026.0.0
           env:
             - name: MAIN_DATASOURCE_URL
               value: "jdbc:postgresql://{{ .Release.Name }}-{{ .Values.postgres_database.name }}/{{ .Values.postgres_database.database }}"
